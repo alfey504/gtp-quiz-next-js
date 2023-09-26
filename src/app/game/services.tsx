@@ -6,27 +6,29 @@ export type Question = {
     answer: number
 }
 
-export function getQuestions(topic: string, difficulty: string): Question[] {
+export async function getQuestions(topic: string, difficulty: string): Promise<Question[]> {
+    const res =  await getQuestionsFromApi(topic, difficulty)
+    let questions: Question[] = []
+    res.data.forEach((element: any) => {
+        let question = {
+            question: element.question,
+            choices: element.choices,
+            answer: element.answer
+        }
+        questions.push(question)
+    });
+    return questions
+}
 
-    const question1: Question = {
-        question: "Who is the father of the Nation",
-        choices: ['Sasi', "Gandhi", "Soman", "Raju"],
-        answer: 2
+async function getQuestionsFromApi(topic: string, difficulty: string): Promise<any> {
+    try{
+        const res = await fetch('/api/hello?topic='+ topic + '&difficulty=' + difficulty)
+        const data = await res.json();
+        return data
+    }catch(error: any){
+        console.log(error)
+        return "rand"
     }
-
-    const question2: Question = {
-        question: "What is the national flower",
-        choices: ['Lotus', "tulips", "rose", "sunflower"],
-        answer: 1
-    }
-
-    const question3: Question = {
-        question: "what is the name of the prtagonist in chainsaw man",
-        choices: ['Denji', "Makima", "Yui", "Yuko"],
-        answer: 1
-    }
-
-    return [question1, question2, question3]
 }
 
 export function verifyTopic(topic: string): boolean {
