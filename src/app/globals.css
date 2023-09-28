@@ -26,3 +26,7 @@ body {
 .border-green {
   border-color: #003035;
 }
+
+.hover-bg-light-green:hover {
+  background-color: #2eaf7d;
+}

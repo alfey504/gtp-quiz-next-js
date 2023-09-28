@@ -17,7 +17,7 @@ export default function LoadingNode(): ReactNode {
 
     return (
         <main className="flex flex-col justify-center items-center">
-            <div className="text-4xl flex justify-center mt-80 text-white">Generating questions from ChatGPT please wait</div>
+            <div className="text-4xl flex justify-center mt-80 text-green">Generating questions from ChatGPT please wait</div>
             <div className="text-4xl flex justify-center mt-80 text-white">{loadingDots}</div>
         </main>
     )
